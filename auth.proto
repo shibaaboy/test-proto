@@ -1,12 +1,32 @@
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
-bla bla 
+syntax = "proto3";
+
+package bookStorePackage;
+
+// Defines a service with RPC methods.
+service Book {
+  // Creates a new book.
+  rpc createBook (BookItem) returns (BookItem);
+  // Reads a single book by ID.
+  rpc readBook (BookRequest) returns (BookItem);
+  // Reads a list of all books.
+  rpc readBooks (Empty) returns (BooksList);
+}
+
+// Represents a single book item.
+message BookItem {
+  int32 id = 1;
+  string book = 2;
+}
+
+// Represents a request to read a specific book.
+message BookRequest {
+  int32 id = 1;
+}
+
+// Represents a list of books.
+message BooksList {
+  repeated BookItem books = 1;
+}
+
+// An empty message for methods that don't need parameters.
+message Empty {}
